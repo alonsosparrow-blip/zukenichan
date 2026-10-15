@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Viaje Miami · Orlando · Atlanta</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1b1f2a;--mu:#6b7280;--bd:#e5e7eb;--ac:#2563eb;--dg:#dc2626;--miami:#e11d74;--orl:#7c3aed;--nc:#059669;--atl:#d97706;--otro:#64748b;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1219;--card:#181c26;--tx:#eef0f5;--mu:#9aa3b2;--bd:#2a3040;--ac:#60a5fa;--dg:#f87171;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1219;--card:#181c26;--tx:#eef0f5;--mu:#9aa3b2;--bd:#2a3040;--ac:#60a5fa;--dg:#f87171;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.4}
+.w{max-width:980px;margin:0 auto;padding:16px}
+h1{font-size:1.4rem;margin:4px 0}
+.sub{color:var(--mu);margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px}
+.kpi small{color:var(--mu);display:block}
+.kpi b{font-size:1.4rem}
+h2{font-size:1.05rem;margin:0 0 10px}
+input,select{padding:8px;border-radius:8px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font-size:1rem;width:100%}
+.kpi input{width:70px}
+button{font:inherit;cursor:pointer}
+.btn{padding:8px 12px;border-radius:9px;border:1px solid var(--bd);background:var(--card);color:var(--tx)}
+.btn.pr{background:var(--ac);color:#fff;border-color:var(--ac)}
+.btn.dg{color:var(--dg)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chip{padding:6px 12px;border-radius:99px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-size:.85rem}
+.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal .h{text-align:center;color:var(--mu);font-size:.75rem}
+.d{aspect-ratio:1/1;border-radius:10px;border:1px solid var(--bd);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.9rem;background:transparent;color:var(--mu);padding:0}
+.d.on{color:#fff;font-weight:600;border:0}
+.d i{font-style:normal;font-size:.55rem}
+.leg{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;font-size:.8rem;color:var(--mu)}
+.leg span:before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--c);margin-right:5px}
+.day{border-left:5px solid var(--c)}
+.dh{display:flex;gap:8px;align-items:flex-start;justify-content:space-between;margin-bottom:6px}
+.dh h3{margin:0;font-size:1rem}
+.badge{display:inline-block;color:#fff;border-radius:99px;padding:2px 10px;font-size:.75rem;margin-left:6px}
+.ev{display:flex;gap:10px;padding:8px 0;border-top:1px solid var(--bd);align-items:center}
+.t{min-width:62px;font-weight:600;color:var(--ac);font-size:.9rem}
+.x{flex:1}
+.p{white-space:nowrap;font-weight:600}
+.ic{border:0;background:transparent;padding:4px 6px;font-size:1rem}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--bd)}
+.r{text-align:right}
+tfoot td{font-weight:700;border-bottom:0}
+.note{color:var(--mu);font-size:.8rem;margin-top:8px}
+dialog{border:1px solid var(--bd);border-radius:16px;background:var(--card);color:var(--tx);width:min(92vw,420px);padding:16px}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+label{display:block;font-size:.8rem;color:var(--mu);margin:10px 0 4px}
+</style>
+</head>
+<body>
+<div class="w">
+  <h1>✈️ Viaje Miami · Orlando · N. Carolina · Atlanta</h1>
+  <p class="sub">Diciembre 2026 · Cualquiera con el enlace puede editar. <span id="st">⏳ Cargando…</span></p>
+
+  <div class="grid">
+    <div class="kpi"><small>Personas</small><b><input id="n" type="number" min="1" value="2"></b></div>
+    <div class="kpi"><small>Costo por persona</small><b id="kpp"></b></div>
+    <div class="kpi"><small>Costo total</small><b id="ktot"></b></div>
+    <div class="kpi"><small>Días</small><b id="kd"></b></div>
+  </div>
+
+  <div class="card">
+    <h2>📅 Calendario · Diciembre 2026</h2>
+    <div class="cal" id="cal"></div>
+    <div class="leg" id="leg"></div>
+    <div class="note">Toca un día para ir a su itinerario.</div>
+  </div>
+
+  <div class="card">
+    <h2>🔎 Filtros</h2>
+    <div class="row" id="chips" style="margin-bottom:10px"></div>
+    <div class="row">
+      <input id="q" placeholder="Buscar (hotel, uber, yate...)" style="flex:1;min-width:180px">
+      <label class="row" style="margin:0;color:var(--tx);font-size:.9rem"><input type="checkbox" id="oc" style="width:auto"> Solo con costo</label>
+      <button class="btn" id="clr">Limpiar</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>💵 Costos</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Día</th><th>Concepto</th><th class="r">x persona</th><th class="r">Total</th><th></th></tr></thead>
+      <tbody id="tb"></tbody>
+      <tfoot><tr><td colspan="2" id="flab">TOTAL</td><td class="r" id="fpp"></td><td class="r" id="ft"></td><td></td></tr></tfoot>
+    </table></div>
+  </div>
+
+  <div class="row" style="justify-content:space-between;margin-bottom:10px">
+    <h2 style="margin:0">🗓️ Itinerario</h2>
+    <div class="row"><button class="btn pr" id="addd">+ Día</button><button class="btn dg" id="rst">Restablecer</button></div>
+  </div>
+  <div id="list"></div>
+</div>
+
+<dialog id="dlg"></dialog>
+
+<script>
+const COL={Miami:'var(--miami)',Orlando:'var(--orl)','N. Carolina':'var(--nc)',Atlanta:'var(--atl)',Otro:'var(--otro)'};
+const CITIES=Object.keys(COL);
+const WD=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+const U=()=>'e'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const E=(t,x,p)=>({id:U(),t,x,p:p||0});
+function def(){return {n:2,rev:0,days:[
+{d:15,c:'Miami',t:'Llegada a Miami → Orlando',e:[E('6:10 am','Llego a Miami'),E('12:00 pm','Recojo a mi mamá en Fort Lauderdale'),E('—','Regresamos al aeropuerto de Miami'),E('2:00 pm','Bus Miami → Orlando',30),E('6:00 pm','Llegamos a Orlando'),E('—','Uber al hotel Orlando',10),E('6:30 pm','Hotel Orlando',120)]},
+{d:16,c:'Orlando',t:'Universal Studios',e:[E('7:00 am','Desayuno'),E('8:00 am','Bus del hotel a Universal'),E('9:00 am','Entrada Universal',180),E('5:00 pm','Salida del parque y descanso')]},
+{d:17,c:'Miami',t:'Orlando → Miami Beach',e:[E('7:00 am','Desayuno'),E('10:00 am','Bus Orlando → Miami',30),E('4:00 pm','Llegada al aeropuerto de Miami'),E('—','Uber aeropuerto → hotel',15),E('5:00 pm','Hotel Miami Beach',200)]},
+{d:18,c:'Miami',t:'Playas, shopping y yate',e:[E('7:00 am','Desayuno'),E('—','Visitamos playas o hacemos shopping'),E('4:00 pm','Paseo en yate en Bayside',25)]},
+{d:20,c:'Miami',t:'Miami → Asheville',e:[E('7:00 am','Desayuno'),E('11:00 am','Check-out'),E('—','Almuerzo'),E('2:00 pm','Estación del tren'),E('3:30 pm','Llegada a Fort Lauderdale'),E('8:30 pm','Viaje a Asheville'),E('11:00 pm','Llegada a Asheville')]},
+{d:21,c:'N. Carolina',t:'Día en North Carolina',e:[E('—','Lo pasamos en North Carolina')]},
+{d:22,c:'N. Carolina',t:'Día en North Carolina',e:[E('—','Lo pasamos en North Carolina')]},
+{d:23,c:'Atlanta',t:'Viaje a Atlanta',e:[E('Mañana','Salida hacia Atlanta'),E('2:00 pm','Llegada a Atlanta',89)]},
+{d:24,c:'Atlanta',t:'Día en Atlanta',e:[E('—','Lo pasamos en Atlanta')]},
+{d:25,c:'N. Carolina',t:'Regreso a Carolina del Norte',e:[E('Tarde','Regresamos a Carolina del Norte')]}
+]}}
+const LS='viaje_dash_v3';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const money=v=>'$'+(Math.round(v*100)/100).toLocaleString('en-US');
+const wd=d=>WD[new Date(2026,11,d).getDay()];
+let S=null,online=true,dirty=false,timer=null,F={city:'Todas',q:'',oc:false};
+const setSt=()=>{$('st').textContent=!online?'⚠️ Sin conexión (guardado solo en este dispositivo)':dirty?'💾 Guardando…':'✅ Guardado y compartido'};
+
+async function pull(){
+  try{const r=await fetch('/api/state',{cache:'no-store'});if(!r.ok)throw 0;online=true;return await r.json()}
+  catch(e){online=false;return undefined}
+}
+function save(){
+  try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}
+  dirty=true;setSt();clearTimeout(timer);timer=setTimeout(push,400);
+}
+async function push(){
+  try{
+    const r=await fetch('/api/state',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(S)});
+    if(!r.ok)throw 0;const j=await r.json();S.rev=j.rev;online=true;dirty=false;
+  }catch(e){online=false}
+  setSt();
+}
+async function init(){
+  const d=await pull();
+  if(d)S=d;
+  else{
+    let l=null;try{l=JSON.parse(localStorage.getItem(LS))}catch(e){}
+    S=(d===undefined&&l&&l.days)?l:def();
+    if(d===null)save();
+  }
+  render(true);setSt();
+  setInterval(async()=>{
+    if(dirty||dlg.open||['INPUT','SELECT'].includes(document.activeElement.tagName))return;
+    const x=await pull();
+    if(x&&x.days&&x.rev>(S.rev||0)){S=x;render(true)}
+    setSt();
+  },8000);
+}
+
+function match(day,ev){
+  const q=F.q.toLowerCase();
+  if(F.city!=='Todas'&&day.c!==F.city)return false;
+  if(F.oc&&!(ev&&ev.p))return false;
+  if(q&&ev){const dm=(day.t+' '+day.c).toLowerCase().includes(q);if(!dm&&!(ev.x+' '+ev.t).toLowerCase().includes(q))return false}
+  return true;
+}
+function render(ns){
+  S.days.sort((a,b)=>a.d-b.d);
+  const n=Math.max(1,parseInt(S.n)||1);S.n=n;
+  const all=S.days.flatMap(d=>d.e);
+  const pp=all.reduce((s,e)=>s+(+e.p||0),0);
+  if(document.activeElement!==$('n'))$('n').value=n;
+  $('kpp').textContent=money(pp);$('ktot').textContent=money(pp*n);$('kd').textContent=S.days.length;
+  let h=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'].map(l=>`<div class="h">${l}</div>`).join('');
+  h+='<div></div>';
+  for(let i=1;i<=31;i++){const x=S.days.find(z=>z.d===i);
+    h+=x?`<button class="d on" data-go="${i}" style="background:${COL[x.c]}">${i}<i>${esc(x.c.split(' ')[0])}</i></button>`:`<div class="d">${i}</div>`}
+  $('cal').innerHTML=h;
+  $('leg').innerHTML=CITIES.map(c=>`<span style="--c:${COL[c]}">${c}</span>`).join('');
+  $('chips').innerHTML=['Todas',...CITIES].map(c=>`<button class="chip ${F.city===c?'on':''}" data-city="${c}">${c}</button>`).join('');
+  let rows='',tp=0;
+  S.days.forEach(d=>d.e.forEach(e=>{if(e.p&&match(d,e)){tp+=+e.p;
+    rows+=`<tr><td>${wd(d.d)} ${d.d}</td><td>${esc(e.x)}</td><td class="r">${money(+e.p)}</td><td class="r">${money(e.p*n)}</td><td class="r" style="white-space:nowrap"><button class="ic" data-ed="${d.d}|${e.id}">✏️</button><button class="ic" data-del="${d.d}|${e.id}">🗑️</button></td></tr>`}}));
+  $('tb').innerHTML=rows||'<tr><td colspan="5" style="color:var(--mu)">Sin costos con este filtro.</td></tr>';
+  $('fpp').textContent=money(tp);$('ft').textContent=money(tp*n);
+  $('flab').textContent=(F.city!=='Todas'||F.q||F.oc)?'TOTAL (filtrado)':'TOTAL';
+  let out='';
+  S.days.forEach(d=>{
+    if(F.city!=='Todas'&&d.c!==F.city)return;
+    const evs=d.e.filter(e=>match(d,e));
+    if((F.q||F.oc)&&!evs.length)return;
+    out+=`<div class="card day" id="day${d.d}" style="--c:${COL[d.c]}"><div class="dh"><h3>${wd(d.d)} ${d.d} Dic · ${esc(d.t)}<span class="badge" style="background:${COL[d.c]}">${esc(d.c)}</span></h3><div style="white-space:nowrap"><button class="ic" data-editday="${d.d}">✏️</button><button class="ic" data-delday="${d.d}">🗑️</button></div></div>`+
+    evs.map(e=>`<div class="ev"><div class="t">${esc(e.t)}</div><div class="x">${esc(e.x)}</div>${e.p?`<div class="p">$${e.p}/p</div>`:''}<button class="ic" data-ed="${d.d}|${e.id}">✏️</button><button class="ic" data-del="${d.d}|${e.id}">🗑️</button></div>`).join('')+
+    `<button class="btn" style="margin-top:8px" data-add="${d.d}">+ Actividad</button></div>`});
+  $('list').innerHTML=out||'<div class="card" style="color:var(--mu)">No hay resultados con este filtro.</div>';
+  if(!ns)save();
+}
+const dlg=$('dlg');
+function openEv(dn,id){
+  const day=S.days.find(z=>z.d===dn);const ev=id?day.e.find(e=>e.id===id):null;
+  dlg.innerHTML=`<h2>${ev?'Editar':'Nueva'} actividad · ${wd(dn)} ${dn}</h2>
+  <label>Hora</label><input id="f1" value="${esc(ev?ev.t:'')}" placeholder="7:00 am">
+  <label>Descripción</label><input id="f2" value="${esc(ev?ev.x:'')}">
+  <label>Costo por persona ($, vacío = sin costo)</label><input id="f3" type="number" min="0" step="any" value="${ev&&ev.p?ev.p:''}">
+  <div class="row" style="margin-top:14px;justify-content:flex-end"><button class="btn" id="cx">Cancelar</button><button class="btn pr" id="ok">Guardar</button></div>`;
+  $('cx').onclick=()=>dlg.close();
+  $('ok').onclick=()=>{const x=$('f2').value.trim();if(!x){$('f2').focus();return}
+    const v={t:$('f1').value.trim()||'—',x,p:parseFloat($('f3').value)||0};
+    if(ev)Object.assign(ev,v);else day.e.push({id:U(),...v});
+    dlg.close();render()};
+  dlg.showModal();
+}
+function openDay(dn){
+  const day=dn?S.days.find(z=>z.d===dn):null;
+  dlg.innerHTML=`<h2>${day?'Editar':'Nuevo'} día</h2>
+  <label>Día de diciembre (1–31)</label><input id="f1" type="number" min="1" max="31" value="${day?day.d:''}">
+  <label>Título</label><input id="f2" value="${esc(day?day.t:'')}">
+  <label>Ciudad</label><select id="f3">${CITIES.map(c=>`<option ${day&&day.c===c?'selected':''}>${c}</option>`).join('')}</select>
+  <div class="row" style="margin-top:14px;justify-content:flex-end"><button class="btn" id="cx">Cancelar</button><button class="btn pr" id="ok">Guardar</button></div>`;
+  $('cx').onclick=()=>dlg.close();
+  $('ok').onclick=()=>{const d=parseInt($('f1').value),t=$('f2').value.trim();
+    if(!(d>=1&&d<=31)||!t){alert('Pon un día válido y un título.');return}
+    if(S.days.some(z=>z.d===d&&z!==day)){alert('Ese día ya existe.');return}
+    if(day){day.d=d;day.t=t;day.c=$('f3').value}else S.days.push({d,t,c:$('f3').value,e:[]});
+    dlg.close();render()};
+  dlg.showModal();
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b||!S)return;const D=b.dataset;
+  if(D.go){let el=$('day'+D.go);if(!el){F={city:'Todas',q:'',oc:false};$('q').value='';$('oc').checked=false;render(true);el=$('day'+D.go)}el&&el.scrollIntoView({behavior:'smooth'})}
+  else if(D.city){F.city=D.city;render(true)}
+  else if(D.ed){const[a,i]=D.ed.split('|');openEv(+a,i)}
+  else if(D.add)openEv(+D.add)
+  else if(D.del){const[a,i]=D.del.split('|');if(confirm('¿Eliminar esta actividad?')){const dy=S.days.find(z=>z.d===+a);dy.e=dy.e.filter(x=>x.id!==i);render()}}
+  else if(D.editday)openDay(+D.editday)
+  else if(D.delday){if(confirm('¿Eliminar el día completo y sus actividades?')){S.days=S.days.filter(z=>z.d!==+D.delday);render()}}
+});
+$('addd').onclick=()=>S&&openDay();
+$('n').oninput=e=>{S.n=parseInt(e.target.value)||1;render()};
+$('q').oninput=e=>{F.q=e.target.value;render(true)};
+$('oc').onchange=e=>{F.oc=e.target.checked;render(true)};
+$('clr').onclick=()=>{F={city:'Todas',q:'',oc:false};$('q').value='';$('oc').checked=false;render(true)};
+$('rst').onclick=()=>{if(confirm('¿Restablecer el itinerario original para TODOS? Se perderán los cambios.')){const r=S.rev;S=def();S.rev=r;render()}};
+init();
+</script>
+</body>
+</html>
